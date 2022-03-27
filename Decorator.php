@@ -26,6 +26,11 @@ class SendEmail implements SendInterface {
         $this->sendEmail();
         return $this->sender->send();
     }
+
+    private function sendEmail()
+    {
+        // ...
+    }
 }
 
 class SendSms extends Sender {
@@ -40,6 +45,11 @@ class SendSms extends Sender {
     {
         $this->sendSms();
         return $this->sender->send();
+    }
+
+    private function sendSms()
+    {
+        // ...
     }
 }
 
@@ -56,8 +66,19 @@ class SendCN extends Sender {
         $this->sendCN();
         return $this->sender->send();
     }
+
+    private function sendCN()
+    {
+        // ...
+    }
 }
 
-$sender = new SendCN(new SendSms(new SendEmail(new Sender())));
+$sender = new SendCN(
+    new SendSms(
+        new SendEmail(
+            new Sender()
+        )
+    )
+);
 
 $sender->send();
